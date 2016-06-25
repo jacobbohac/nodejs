@@ -8,8 +8,12 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var database = require('./routes/database');
+var jade_example = require('./routes/jade_example');
 
 var app = express();
+
+// configure app to serve static html files
+app.use(express.static(__dirname));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -27,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 app.use('/database', database);
+app.use('/jade_example', jade_example);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

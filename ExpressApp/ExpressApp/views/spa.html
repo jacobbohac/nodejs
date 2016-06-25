@@ -1,0 +1,19 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>SPA Example</title>    
+</head>
+<body>
+    <h1>I'm a single page application!</h1>
+    <ul data-bind="foreach: todoItems">
+        <li>
+            <span data-bind="text: name"></span>
+            <input type="checkbox" data-bind="checked: complete" />            
+        </li>
+    </ul>
+</body>
+<script src="../scripts/jquery-3.0.0.js"></script>
+<script src="../scripts/knockout-3.4.0.js"></script>
+<script src="../knockout/spaViewmodel.js"></script>
+</html>

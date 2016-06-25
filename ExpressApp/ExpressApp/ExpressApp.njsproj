@@ -31,20 +31,29 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="scripts\jquery-3.0.0.js" />
+    <Compile Include="scripts\knockout-3.4.0.js" />
+    <Compile Include="knockout\spaViewmodel.js" />
     <Compile Include="routes\database.js" />
     <Compile Include="routes\index.js" />
+    <Compile Include="routes\jade_example.js" />
     <Compile Include="routes\users.js" />
     <Compile Include="bin\www" />
     <Content Include="package.json" />
     <Content Include="public\stylesheets\style.styl" />
     <Content Include="README.md" />
+    <Content Include="TODO" />
     <Content Include="views\database.jade" />
     <Content Include="views\index.jade" />
+    <Content Include="views\jade_example.jade" />
+    <Content Include="views\spa.html" />
     <Content Include="views\layout.jade" />
     <Content Include="views\error.jade" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\" />
+    <Folder Include="knockout\" />
+    <Folder Include="scripts\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
     <Folder Include="public\javascripts\" />
