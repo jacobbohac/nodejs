@@ -35,8 +35,8 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-connection.query("use example");
-var strQuery = "select * from alcohol";
+connection.query("use nodedb");
+var strQuery = "select * from alcohol_purchases";
 
 connection.query(strQuery, function (err, rows) {
     if (err) {
