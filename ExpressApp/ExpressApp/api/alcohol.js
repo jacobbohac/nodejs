@@ -1,30 +1,6 @@
 ﻿var express = require('express');
 var router = express.Router();
 
-var DataViewModel = function (data){
-    this.date = data.date;
-    this.amount = data.amount;
-}
-
-var DataListViewModel = function (){
-    this.dataItems = [];
-}
-
-var dbRecords = new DataListViewModel();
-
-/* GET records from database page. */
-router.get('/', function (req, res) {
-    /*res.json(200, [
-        { date: "2016-06-25", amount: "14.00"},
-    ]);
-     */
-    console.log(dbRecords);
-    res.json(200, dbRecords);
-    res.end();
-});
-
-module.exports = router;
-
 var mysql = require('mysql');
 var connection = mysql.createConnection({
     host : 'localhost',
@@ -34,22 +10,53 @@ var connection = mysql.createConnection({
 });
 
 connection.connect();
-
 connection.query("use nodedb");
-var strQuery = "select * from alcohol_purchases";
 
-connection.query(strQuery, function (err, rows) {
-    if (err) {
-        throw err;
-    } else {
-        console.log(rows);
-        var index, len;
-        for (index = 0, len = rows.length; index < len; ++index) {
-            dbRecords.dataItems.push(new DataViewModel({ date: rows[index].date, amount: rows[index].amount }));
-        }     
-    }
+module.exports = router;
+
+var DataViewModel = function (data){
+    this.date = data.date;
+    this.amount = data.amount;
+}
+
+var DataListViewModel = function (){
+    this.dataItems = [];
+}
+
+/* GET records from database page. */
+router.get('/', function (req, res) {
+    
+    var strQuery = "select * from alcohol_purchases";    
+    var dbRecords = new DataListViewModel();
+
+    connection.query(strQuery, function (err, rows) {        
+        if (err) {
+            throw err;
+        } else {
+            var index, len;
+            for (index = 0, len = rows.length; index < len; ++index) {
+                dbRecords.dataItems.push(new DataViewModel({ date: rows[index].date, amount: rows[index].amount }));                
+            }
+        }
+        
+        console.log(dbRecords);
+        res.json(200, dbRecords);
+    });   
 });
 
-connection.end(function(err){
-// Do something after the connection is gracefully terminated.
+/* POST a record to the database. */
+router.post('/', function (req, res) {
+    console.log(req);
+    console.log(req.body.date);
+    console.log(req.body.amount);
+    var strQuery = 'insert into alcohol_purchases values ("' + req.body.date + '", ' + req.body.amount + ')';
+    console.log(strQuery);
+    connection.query(strQuery, function (err, rows) {
+        if (err) {
+            console.log("err while posting data");
+        } else {
+            console.log("data was posted successfully");
+            res.json(200);
+        }
+    });
 });

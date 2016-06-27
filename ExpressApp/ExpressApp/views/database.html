@@ -6,13 +6,23 @@
     <title></title>
 </head>
 <body>
-    <h1>Database Example</h1>    
+    <h1>Alcohol Purchases</h1>    
     <ul data-bind="foreach: dataItems">
         <li>
             <span data-bind="text: date"></span>  
             <span data-bind="text: amount"></span>          
         </li>
     </ul>
+
+    <p>
+        <h3>Date:</h3>
+        <input data-bind="value: date" />
+    </p>
+    <p>
+        <h3>Amount:</h3>
+        <input data-bind="value: amount" />
+    </p>
+    <button data-bind="click:addRecord">Add Record</button>
 </body>
 <script src="../scripts/jquery-3.0.0.js"></script>
 <script src="../scripts/knockout-3.4.0.js"></script>
